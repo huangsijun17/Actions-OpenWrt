@@ -98,6 +98,15 @@ jobs:
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
 
+    - name: copy .config
+      run: cp -Rf openwrt/.config ${GITHUB_WORKSPACE}/config.txt
+       
+    - name: Upload .config directory
+      uses: actions/upload-artifact@main
+      with:
+        name: .config
+        path: config.txt
+
     - name: Compile the firmware
       id: compile
       run: |
