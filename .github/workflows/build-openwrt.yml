@@ -16,8 +16,8 @@ on:
     inputs:
       ssh:
         description: 'SSH connection to Actions'
-        required: true
-        default: 'true'
+        required: false
+        default: 'false'
 
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
@@ -145,11 +145,11 @@ jobs:
         name: OpenWrt_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: ${{ env.FIRMWARE }}
 
-    - name: Copy .config
-      run: |
-        ls ${{ env.FIRMWARE }}
-        cp openwrt/.config ${{ env.FIRMWARE }}
-        ls ${{ env.FIRMWARE }}
+#    - name: Copy .config
+#      run: |
+#        ls ${{ env.FIRMWARE }}
+#        cp openwrt/.config ${{ env.FIRMWARE }}
+#        ls ${{ env.FIRMWARE }}
 
     - name: Upload firmware to cowtransfer
       id: cowtransfer
