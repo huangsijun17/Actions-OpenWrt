@@ -113,9 +113,6 @@ jobs:
       if: (!cancelled())
       run: df -hT
 
-    - name: Copy .config
-      run: cp openwrt/.config ${{ env.FIRMWARE }}
-
     - name: Upload bin directory
       uses: actions/upload-artifact@main
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
@@ -138,6 +135,9 @@ jobs:
       with:
         name: OpenWrt_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: ${{ env.FIRMWARE }}
+
+    - name: Copy .config
+      run: cp openwrt/.config ${{ env.FIRMWARE }}
 
     - name: Upload firmware to cowtransfer
       id: cowtransfer
